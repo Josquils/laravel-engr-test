@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('hmos', function (Blueprint $table) {
+        Schema::create('batches', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('code')->unique();
-            $table->boolean('is_batched_by_encounter')->default(true);
+            $table->string('name')->unique();
+            $table->string('hmo_code');
+            $table->string('provider_name');
+            $table->date('batch_date');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrentOnUpdate()->useCurrent();
         });
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('hmos');
+        Schema::dropIfExists('batches');
     }
 };

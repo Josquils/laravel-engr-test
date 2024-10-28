@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('batch_id')->nullable();
+            $table->string('hmo_code');
+            $table->string('provider_name');
+            $table->json('payload');
+            $table->decimal('total',10,2)->default(0);
+            $table->date('encounter_date')->useCurrent();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrentOnUpdate()->useCurrent();
         });
     }
 

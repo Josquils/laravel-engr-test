@@ -5,22 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Order extends Model
+class Batch extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'hmo_code',
+        'name',
         'provider_name',
-        'batch_id',
-        'payload',
-        'encounter_date',
-        'total'
-    ];
-
-    protected $casts = [
-        'payload' => 'array'
+        'hmo_code',
+        'batch_date',
     ];
 
     public function hmo(): BelongsTo
@@ -28,8 +23,8 @@ class Order extends Model
         return $this->belongsTo(Hmo::class, 'hmo_code', 'code');
     }
 
-    public function batch(): BelongsTo
+    public function orders(): HasMany
     {
-        return $this->belongsTo(Batch::class);
+        return $this->hasMany(Order::class);
     }
 }

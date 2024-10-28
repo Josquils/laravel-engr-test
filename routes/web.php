@@ -1,13 +1,18 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('SubmitOrder');
-});
+// Route::get('/', function () {
+//     $hmos = Hmo::all();
+//     return Inertia::render('SubmitOrder',['hmos' => $hmos]);
+// });
+
+Route::get('/', [OrderController::class, 'index'])->name('orders.index');
+Route::post('/orders/save', [OrderController::class, 'save'])->name('orders.save');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
