@@ -60,7 +60,7 @@ class SubmitOrderTest extends TestCase
             'total' => 351.2
         ];
 
-        $this->correct_order_a_batch_name = "Provider A October 2024";
+        $this->correct_order_a_batch_name = "Provider A ". now()?->format('F Y');
         $this->correct_order_b_batch_name = "Provider B April 2024";
     }
 
